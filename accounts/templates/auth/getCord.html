@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+{% csrf_token %}
+<p>Click the button to get your coordinates.</p>
+
+{% comment %} <a href="#" id="getMe" onclick="getLocation()">jhhghj</a> {% endcomment %}
+<button id="getMe" onclick="getLocation()" style="width:50%;height:50vh;">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+ 
+var x = document.getElementById("demo");
+$("#getMe").on('touchstart click', function(event) {
+    if (event.type == "touchstart") {
+        $(this).off('click');
+        getLocation();
+        console.log("Only touch event is fired");
+        alert("sdd");
+    } else if (event.type == "click") {
+        $(this).off('touchstart');
+        getLocation();
+        console.log("Only click event is fired");
+    }
+});
+{% comment %} var btn = document.getElementById("getMe");
+
+btn.addEventListener('touchStart', function () {
+    getLocation();
+}); {% endcomment %}
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  var token = $("input[name='csrfmiddlewaretoken']").val();
+  document.getElementById('getMe').style.display="none";
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+    $.ajax({
+        type: 'POST',
+        url: "/getMe",
+        data: { 'Lat': position.coords.latitude,'csrfmiddlewaretoken': token, 'Long': position.coords.longitude},
+        success: function (response) {
+            if (response) {
+                console.log(response);
+            }
+        }
+    })
+}
+
+</script>
+
+</body>
+</html>
+

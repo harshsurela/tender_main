@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" >
+    <link rel="stylesheet" href="{% static 'resources/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/brands.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/solid.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/tender.css' %}">
+    <title>Tender</title>
+    <style>
+       @media (max-width: 768px) {
+            .container.contentdata {
+                margin-top: 10px;
+                width: 90%;
+                margin-bottom: 10%;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .btn {
+                font-size: 18px;
+            }
+        }
+    </style>
+
+</head>
+<body onload="getLocation()">
+    <div class="container  contentdata mt-5" >
+        <form action="" method="POST" enctype="multipart/form-data" class="container form-inline" onsubmit="return checkForm();" >
+            {% csrf_token %}
+            <h1 class="text-white" align="center" style="margin-top: 4%;">Vendor Details</h1>
+            <hr style="height:3px;border:none;color:white;background-color:white;">
+            <div id="productData">
+
+                <div class="row tabledata" >
+                    <div class="col-sm-12 col-12 col-md-12 col-lg-6" >
+                        <div class="form-group inputText mt-3 ">
+                            <label for="inputPassword2" class="labeltext ">Shop Name</label><br>
+                            <input type="text" class="form-control" id="proname" name="sname" placeholder="Shop Name">
+                        </div>
+                    </div>
+                    <input type="text" name="lat" id="lat"  hidden required>
+                    <input type="text" name="long" id="long"  hidden required>
+                    <div class="col-sm-12 col-12 col-md-12 col-lg-6" >
+                        <div class="form-group mt-3 inputText">
+                            <label for="inputPassword2" class="labeltext ">GST Number</label><br>
+                            <input type="number" class="form-control" name="gstNo"  id="proqty" placeholder="GST Code">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-12 col-lg-6" >
+                        <div class="form-group mt-3 inputText">
+                            <label for="inputPassword2" class="labeltext ">Category</label><br>
+                            <select class="form-select" name="category" aria-label="Default select example">
+                                <option selected>Select Category you deal in</option>
+                                {% for c in cat %}
+                                <option value="{{c.id}}">{{c.catName}}</option>
+                                {% endfor %}
+                                
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-12 col-lg-6" >
+                        <div class="form-group inputText mt-3 ">
+                            <label for="inputPassword2" class="labeltext ">GST Image</label><br>
+                            <input type="File" class="form-control" name="gimg" id="proname" placeholder="Shop Name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row tabledata" >
+                    <div class="col-sm-12 col-12 col-md-12 col-lg-6" >
+                        <div class="form-group inputText mt-3 ">
+                            <label for="inputPassword2" class="labeltext ">Shop Image</label><br>
+                            <input type="File" class="form-control" name="simg" id="proname" placeholder="Shop Name">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-12 col-lg-6" >
+                        <div class="form-group mt-3 inputText">
+                            <label for="inputPassword2" class="labeltext ">Contact Number</label><br>
+                            <input type="number" class="form-control" name="contact" id="proqty" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+
+                    <input type="submit" value="Register" class=" mt-5 btn btn-lg btn-success">
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </form>
+    </div>
+<script>
+
+    function checkForm(){
+        var lat = document.getElementById("lat");
+        var long = document.getElementById("long");
+        if(lat=="" && long==""){
+            alert("please allow us to access location");
+            return false;
+        }
+        return true;
+
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+      
+      function showPosition(position) {
+        //var token = $("input[name='csrfmiddlewaretoken']").val();
+        //document.getElementById('getMe').style.display="none";
+        
+        document.getElementById('lat').value = position.coords.latitude;
+        document.getElementById('long').value = position.coords.longitude
+      }
+      
+</script>
+</body>
+</html>

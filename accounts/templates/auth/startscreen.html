@@ -1,0 +1,71 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'resources/startscreen.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/brands.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/solid.css' %}">
+    <style>
+         @media (max-width: 768px) {
+            .diagonal-box {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .button {
+                margin: 10px 10p;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <div class="diagonal-box">
+        <div class="content">
+            <p class="title button__text">
+                Welcome to Tender.
+            </p>
+            <a href="{% url 'onBoarding' %}" style="text-decoration:none;">
+                <button class="button login__submit">
+                    <span class="button__text">Are You a Dealer?</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </a>
+            <a href="{% url 'customerPage' %}" style="text-decoration:none;">
+                <button class="button login__submit">
+                    <span class="button__text">Are You a Customer?</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+
+<script>
+{% if request.user.is_authenticated %}
+
+{% else %}
+window.onload = function() {
+    // similar behavior as an HTTP redirect
+    //alert("Hello");
+    window.location.replace("http://127.0.0.1:8000/accounts/google/login/");
+}
+{% endif %}
+
+</script>
+
+
+</body>
+
+</html>

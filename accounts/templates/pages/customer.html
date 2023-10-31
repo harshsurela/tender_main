@@ -1,0 +1,121 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'resources/startscreen.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/brands.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/solid.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/tender.css' %}">
+
+    <style>
+         @media (max-width: 768px) {
+            .diagonal-box {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .button {
+                margin: 10px 10p;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body onload="getLocation()">
+    <div class="diagonal-box">
+        <form action="{% url 'loadLocation' %}" method="POST" enctype="multipart/form-data" class="container form-inline" id="myForm" onsubmit="return checkForm();" >
+            {% csrf_token %}
+            <input type="text" name="lat" id="lat"  hidden required>
+            <input type="text" name="long" id="long"  hidden required>
+        </form>
+
+        <div class="content">
+            <p class="title button__text">
+                Welcome To Customer Section.
+            </p>
+            <a href="{% url 'tender' %}" style="text-decoration:none;">
+                <button class="button login__submit">
+                    <span class="button__text">Add Tender</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </a>
+            <a href="{% url 'viewTenders' %}" style="text-decoration:none;">
+                <button class="button login__submit">
+                    <span class="button__text">View Previous Tenders</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </a>
+            
+            <a href="{% url 'logoutUser' %}" style="text-decoration:none;">
+                <button class="button login__submit">
+                    <span class="button__text">Logout</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </a>
+            
+        </div>
+    </div>
+<script>
+
+    function checkForm(){
+        // stop page from submitting
+        event.preventDefault();
+
+        var lat = document.getElementById("lat");
+        var long = document.getElementById("long");
+        if(lat=="" && long==""){
+            alert("please allow us to access location");
+            return false;
+        }
+        return true;
+
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+      
+      function showPosition(position) {
+        //var token = $("input[name='csrfmiddlewaretoken']").val();
+        //document.getElementById('getMe').style.display="none";
+        var flag=false;
+        document.getElementById('lat').value = position.coords.latitude;
+        document.getElementById('long').value = position.coords.longitude;
+        
+        const myForm=document.getElementById("myForm"); 
+         myForm.submit();
+
+      }
+      
+</script>
+<script>
+{% if request.user.is_authenticated %}
+// window.onload = function() {
+  
+// }
+{% else %}
+window.onload = function() {
+    // similar behavior as an HTTP redirect
+    //alert("Hello");
+    window.location.replace("http://127.0.0.1:8000/accounts/google/login/");
+}
+{% endif %}
+
+</script>
+
+
+</body>
+
+</html>                                            `

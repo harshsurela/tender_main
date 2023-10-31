@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nearby Dealers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'resources/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/brands.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/solid.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/tender.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Set an initial height for the map container */
+}
+
+    </style>
+</head>
+
+<body class="container">
+    <h5 class="mt-3 text-center display-4">Nearby Dealers Are Listed Below</h5>
+    <p class="mt-3 text-center">This Page Is only Available For 15 Seconds</p>
+    <div id='map'></div>
+
+    <script>
+         // Function to refresh the page
+         function refreshPage() {
+            window.location.href="http://127.0.0.1:8000/tender"; // true forces a reload from the server and not from the cache
+        }
+
+        // Set a timeout to refresh the page after 15 seconds (15000 milliseconds)
+        setTimeout(refreshPage, 15000);
+
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGFyc2hzdXJlbGEiLCJhIjoiY2xub3k5OGYzMGh2cjJucGYwZzB1djZqYiJ9.ZTcoON8tDDETT6I0AUwfHQ';  // Replace with your Mapbox API key
+        // Initialize the map
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            // center: [0, 0],  // Default center
+            // zoom: 1  // Default zoom
+        });
+
+        var locations = [];
+        {% for s in nearBySupplier %}
+        locations.push({
+            name: '{{ s.name }}',
+            coordinates: [{{ s.longitude }}, {{ s.latitude }}]
+        });
+        {% endfor %}
+
+        // Add markers for each location
+        locations.forEach(function (location) {
+            new mapboxgl.Marker()
+                .setLngLat(location.coordinates)  // Make sure coordinates are in the correct format
+                .setPopup(new mapboxgl.Popup().setHTML('<h3 class="fs-3x`">' + location.name + '</h3>'))
+                .addTo(map);
+        });
+    
+       
+    </script>
+</body>
+
+</html>

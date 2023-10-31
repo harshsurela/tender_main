@@ -1,0 +1,16 @@
+:root {
+    --main-color:rgb(10, 97, 185);
+    --secondary-color: rgb(223, 233, 243);
+    --third-color: rgb(56, 124, 192);
+}
+
+body {
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+}
+
+.roudedBorder{
+    border-radius: 20%;
+}
+
+@import "login.scss";

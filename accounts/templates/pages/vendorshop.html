@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'resources/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/brands.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/solid.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/tender.css' %}">
+    <style>
+      .roundcornor {
+        border-radius: 15px !important;
+    }
+
+    .shop-info {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .shop-info img {
+        border-radius: 15px;
+        height: 100px;
+    }
+
+    .card {
+        border: none;
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .card-text {
+        color: #fff;
+    }
+    </style>
+    
+  </head>
+  <body>
+    <div class="container text-center mt-5">
+     <p style="display: inline;">
+      <img src="{% static 'resources/th.jpg' %} "class=" roundcornor"  alt="" height="100px">
+      <span class="fw-bold fs-2 ">Shopname</span> <br><br>
+      <span>4th Floor,Ronak Apartments, Maniyasa society 
+    </span>
+    </p>
+    </div>
+
+    <div class="container-xl p-md-5">
+    <div class="d-flex flex-lg-row flex-md-column justify-content-center align-items-center">
+        {% for as in "dfsf" %}
+          <div class="contentdata m-2">
+            <img src="{% static 'resources/th.jpg' %}" class="card-img-top roundcornor" alt="dsf" >
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-white">Product Name</h5>
+              <p class="card-text ">
+                <p class="text-white ">
+                  <span class="fw-bold">Price : </span> &#8377; 200 <br>
+                 <span class="fw-bold">Discription: </span> Best quality <br>
+                 <span class="fw-bold">Brand Name:</span>TATA
+                 </p>
+              </p>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+      <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

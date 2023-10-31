@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{% static 'resources/login.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/brands.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/fa6/css/solid.css' %}">
+	<link rel="stylesheet" href="{% static 'resources/css/bootstrap.min.css' %}">
+	<style>
+		
+@media (max-width: 768px) {
+  
+  body {
+    font-size: 14px;
+  }
+
+  /* Center the login form */
+  .screen__content {
+    text-align: center;
+  }
+
+  /* Make the form inputs full width */
+  .login__input {
+    width: 100%;
+  }
+
+  /* Adjust spacing */
+  .login__field {
+    margin-bottom: 10px;
+  }
+
+  /* Reduce padding for the button */
+  .login__submit {
+    padding: 10px 20px;
+  }
+
+  /* Hide some background shapes */
+  .screen__background__shape3,
+  .screen__background__shape4 {
+    display: none;
+  }
+}
+
+	</style>
+
+</head>
+<body style="display: flow;">
+    
+
+
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login">
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" placeholder="User name / Email">
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="password" class="login__input" placeholder="Password">
+				</div>
+				<button class="button login__submit">
+					<span class="button__text">Log In Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
+				
+						
+			</form>
+			<div class="social-login">
+				<h4>log in via</h4>
+				<div class="social-icons">
+					<a href="#" class="social-login__icon fab fa-google"></a>
+					<a href="#" class="social-login__icon fab fa-facebook"></a>
+					
+				</div>
+			</div>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<!-- <span class="screen__background__shape screen__background__shape2"></span> -->
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
+
+</body>
+</html>
