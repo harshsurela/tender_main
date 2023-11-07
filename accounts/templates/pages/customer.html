@@ -53,14 +53,14 @@
                     <i class="button__icon fas fa-chevron-right"></i>
                 </button>
             </a>
-            
+
             <a href="{% url 'logoutUser' %}" style="text-decoration:none;">
                 <button class="button login__submit">
                     <span class="button__text">Logout</span>
                     <i class="button__icon fas fa-chevron-right"></i>
                 </button>
             </a>
-            
+
         </div>
     </div>
 <script>
@@ -82,28 +82,28 @@
     function getLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
+        } else {
           x.innerHTML = "Geolocation is not supported by this browser.";
         }
       }
-      
+
       function showPosition(position) {
         //var token = $("input[name='csrfmiddlewaretoken']").val();
         //document.getElementById('getMe').style.display="none";
         var flag=false;
         document.getElementById('lat').value = position.coords.latitude;
         document.getElementById('long').value = position.coords.longitude;
-        
-        const myForm=document.getElementById("myForm"); 
+
+        const myForm=document.getElementById("myForm");
          myForm.submit();
 
       }
-      
+
 </script>
 <script>
 {% if request.user.is_authenticated %}
 // window.onload = function() {
-  
+
 // }
 {% else %}
 window.onload = function() {

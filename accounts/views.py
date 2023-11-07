@@ -15,7 +15,7 @@ from django.views.decorators.cache import never_cache
 
 # Create your views here.
 
-# 
+#
 def getProds(request,tenderId):
     tender = Tender.objects.get(id=tenderId)
     tenderDetails = TenderDetails.objects.filter(tenderId=tender)
@@ -93,7 +93,7 @@ def placetender(request):
                 tenderDetails.save()
         try:
             userLocation = Address.objects.get(userId=customer.userId)
-            lat1 = userLocation.lat 
+            lat1 = userLocation.lat
             lon1 = userLocation.long
         except Exception as e:
             print(e)
@@ -117,7 +117,7 @@ def placetender(request):
                 print(data)
         print(f"the near by supplier is {nearBySupplier}")
         # send nearby supplier to the template for showing in map
-        return render(request,"pages/nearBySup.html",{"nearBySupplier":nearBySupplier})
+        return render(request,"pages/nearBySup.html",{"nearBySupplier":nearBySupplier,"lat1":lat1,"lon1":lon1})
     customer = Customer.objects.filter(userId=request.user)
     if len(customer) == 0 :
         customer = Customer()
@@ -131,16 +131,16 @@ def vendorshop(request):
     return render(request,"pages/vendorshop.html")
 
 def nearByDealer(request):
-    
     return render(request,"pages/nearBySup.html",{"nearBySupplier":nearBySupplier})
+
 class AddressView(CreateView):
-    model = Address 
+    model = Address
     fields = ['address']
     template_name = 'auth/map.html'
     success_url = '/getMe'
 
     def get_context_data(self, **kwargs):
-        
+
         context = super().get_context_data  (**kwargs)
         context['mapbox_access_token'] = 'pk.eyJ1IjoiZXN3YXJpdHNtZSIsImEiOiJja2lvZ3YycDAxYXMzMnFsYnAybDBlZXhvIn0.XLS1ZaIb5mwh43r8ElL_5A'
         context['addresses'] = Address.objects.all()
@@ -158,10 +158,10 @@ def grtCord(request):
         addresObj.long = float(request.POST.get('Long'))
         addresObj.address = supplier.shopName
         addresObj.userId = userObj
-        
+
         addresObj.save()
         print(request.POST.get('Lat'))
-        return redirect('mapMain')  
+        return redirect('mapMain')
 
     return render(request,"auth/getCord.html")
 
@@ -222,7 +222,7 @@ def viewTenders(request):
             Penquotations = Quotation.objects.filter(tender=tender,tender__fullFilled=False,quotation_status=False)
             comQuatations = Quotation.objects.filter(tender=tender,tender__fullFilled=True,quotation_status=True)
             return render(request,"pages/showQuat.html",{"Penquotations":Penquotations,"comQuatations":comQuatations})
-  
+
     tenders=Tender.objects.all()
     quotList=[]
     for t in tenders:
@@ -230,7 +230,7 @@ def viewTenders(request):
         quotList.append(len(quotObj))
     data=zip(tenders,quotList)
     return render(request,"pages/viewTenders.html",{"data":data})
-    
+
 def giveQuat(request, id):
     tender = get_object_or_404(Tender, id=id)
     if request.method == "POST":
@@ -240,7 +240,7 @@ def giveQuat(request, id):
         supplier = Supplier.objects.get(userId=request.user)
         qObj=Quotation()
         qObj.tender = tender
-        qObj.supplier = supplier   
+        qObj.supplier = supplier
         for i in range(0, len(price)):
             qObj.pricePerQty = price[i]
             total_price += int(price[i])
@@ -261,7 +261,7 @@ def pendingQuat(request):
             quat = request.POST.get("accept")
             # quat will have two values comma saparated
             quat = quat.split(",")
-            
+
             t = Tender.objects.get(id=quat[0])
             t.fullFilled=True
             t.save()
@@ -273,7 +273,7 @@ def pendingQuat(request):
             quat = quat.split(",")
 
             quatObj = Quotation.objects.get(id=quat[1])
-            
+
             quatObj.delete()
     return redirect("viewTenders")
 

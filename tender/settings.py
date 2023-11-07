@@ -14,13 +14,13 @@ SECRET_KEY = 'django-insecure-4o2rs+6e8tsn&lb@0!a+@6n#+k#nsu6+@p)d+88s(0vezl$j1)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://harshsurela.pythonanywhere.com/","harshsurela.pythonanywhere.com"]
 
 
 # Application definition
 
 AUTHENTICATION_BACKENDS = [
-    
+
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
@@ -34,13 +34,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites', 
-    'accounts',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    "allauth.account.middleware.AccountMiddleware",
 ]
 SOCIALACCOUNT_LOGIN_ON_GET=True
 
@@ -127,7 +128,7 @@ GP_CLIENT_SECRET = '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'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'accounts/static/'),
-    
+
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
@@ -143,6 +144,13 @@ SITE_ID = 1
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        "APPS": [
+            {
+                "client_id": "814560528675-ok3mgj2vfjkt7atlpe4g7gg3ickr1kg7.apps.googleusercontent.com",
+                "secret": "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",
+                "key": ""
+            },
+        ],
         'SCOPE': [
             'profile',
             'email',
@@ -153,8 +161,8 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = '/'
-
+LOGIN_REDIRECT_URL = 'startscreen'
+USE_X_FORWARDED_HOST = True
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
