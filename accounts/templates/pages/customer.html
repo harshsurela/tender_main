@@ -64,40 +64,107 @@
         </div>
     </div>
 <script>
+// let formSubmitted = false;
+//     function checkForm(){
+//         // stop page from submitting
+//         event.preventDefault();
+//          if (formSubmitted) {
+//         // If the form has already been submitted, prevent further submissions
+//         return false;
+//     }
+//         var lat = document.getElementById("lat");
+//         var long = document.getElementById("long");
+//         if(lat=="" && long==""){
+//             alert("please allow us to access location");
+//             return false;
+//         }
+//         formSubmitted = true; // Set the flag to true to prevent further submissions
+//         return true;
 
-    function checkForm(){
-        // stop page from submitting
-        event.preventDefault();
+//     }
 
-        var lat = document.getElementById("lat");
-        var long = document.getElementById("long");
-        if(lat=="" && long==""){
-            alert("please allow us to access location");
+//     function getLocation() {
+//         if (navigator.geolocation) {
+//           navigator.geolocation.getCurrentPosition(showPosition);
+//         } else {
+//           x.innerHTML = "Geolocation is not supported by this browser.";
+//         }
+//       }
+
+//       function showPosition(position) {
+//         //var token = $("input[name='csrfmiddlewaretoken']").val();
+//         //document.getElementById('getMe').style.display="none";
+//  if (formSubmitted) {
+//         // If the form has already been submitted, do nothing
+//         return;
+//     }
+//     document.getElementById('lat').value = position.coords.latitude;
+//         document.getElementById('long').value = position.coords.longitude;
+
+//         const myForm=document.getElementById("myForm");
+//         formSubmitted = true; // Set the flag to true after submission
+//          myForm.submit();
+
+
+//       }
+    let formSubmitted = false;
+
+    const checkForm = () => {
+        if (formSubmitted) {
+            // If the form has already been submitted, prevent further submissions
+            return true;
+        }
+
+        var lat = document.getElementById("lat").value;
+        var long = document.getElementById("long").value;
+
+        if (lat === "" || long === "") {
+            alert("Please allow us to access your location.");
             return false;
         }
+
+        formSubmitted = true; // Set the flag to true to prevent further submissions
         return true;
+    };
 
-    }
-
-    function getLocation() {
+    const getLocation = () => {
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition, handleGeolocationError);
         } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
+            alert("Geolocation is not supported by this browser.");
         }
-      }
+    };
 
-      function showPosition(position) {
-        //var token = $("input[name='csrfmiddlewaretoken']").val();
-        //document.getElementById('getMe').style.display="none";
-        var flag=false;
+    const showPosition = (position) => {
+        if (formSubmitted) {
+            // If the form has already been submitted, do nothing
+            return;
+        }
+
         document.getElementById('lat').value = position.coords.latitude;
         document.getElementById('long').value = position.coords.longitude;
 
-        const myForm=document.getElementById("myForm");
-         myForm.submit();
+        const myForm = document.getElementById("myForm");
 
-      }
+
+        const formData = new FormData(myForm);
+        fetch(myForm.action, {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                console.log(response)
+            } else {
+                console.log("error")
+            }
+        });
+
+        formSubmitted = true; // Set the flag to true after submission
+    };
+
+    const handleGeolocationError = (error) => {
+        console.error("Geolocation error: " + error.message);
+    };
 
 </script>
 <script>

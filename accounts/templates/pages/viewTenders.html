@@ -24,8 +24,8 @@
             label, button{
               font-size: 10px !important;
             }
-        }   
-        
+        }
+
         .container, .tendor_container {
             max-width: 100%;
             padding: 20px;
@@ -34,12 +34,12 @@
           border-radius: 15px;
           background-color: #5f57a3;
           padding: 3%;
-          width:min(95%, 1000px); 
+          width:min(95%, 1000px);
         }
         td{
          padding : 10px;
         }
-        
+
         @media (max-width: 446px)
         {
         td{
@@ -54,7 +54,7 @@
             .labeltext {
              font-size: 13px;
             }
-        }   
+        }
         .form-range {
             width: 100%;
         }
@@ -64,15 +64,15 @@
         .tendor_table{
           width: 100%;
         }
-     
+
     </style>
 </head>
 <body>
     <div class="container tendor_container mt-5" >
-        
+
             <h1 class="text-white" align="center">View Tenders</h1>
             <hr style="height:3px;border:none;color:white;background-color:white;">
-            <div id="productData" >
+            <div id="productData row justify-content-center" >
                     <div class="col-12 col-md-8 mx-auto" >
                       <form action="" method="post">
                         {% csrf_token %}
@@ -85,26 +85,26 @@
                                 <th scope="col"></th>
                               </tr>
                             </thead>
-                        
+
                             <tbody>
                               {% if data %}
                               {% for t,q in data  %}
                               <tr>
-                                <td>Tender {{forloop.counter}}</td> 
+                                <td>Tender {{forloop.counter}}</td>
                                 <td><button class="btn btn-primary" value="{{t.id}}"  name="viewProd">View Products</button></td>
                                 <td><button class="btn btn-primary" type="submit" name="viewQuat" value="{{t.id}}">View Quotation</button></td>
                                 <td>
 
                                 {% if q != 0 %}
                                 <label for="" class="btn btn-info">Tender Closed</label>
-                                
+
                                 {% else %}
                                   <button class="btn btn-danger" value="{{t.id}}"  name="delTen">Delete Tender</button>
                                   {% endif %}
 
                                 </td>
                                 </tr>
-                              
+
                               {% endfor %}
                               {% else %}
                               <tr>
@@ -119,9 +119,9 @@
                     </div>
                 </div>
             </div>
-           
+
     </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-     
+
 </body>
 </html>

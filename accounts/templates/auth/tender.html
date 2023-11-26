@@ -25,13 +25,13 @@
                 display: block;
                 width: 100%;
             }
-        }   
-        
+        }
+
         .container.contentdata {
             max-width: 100%;
             padding: 20px;
         }
-        
+
         @media (max-width: 446px)
         {
             .labeltext {
@@ -43,24 +43,24 @@
             .labeltext {
              font-size: 13px;
             }
-        }   
+        }
         .form-range {
             width: 100%;
         }
         .labeltext {
             text-align: center;
         }
-     
+
     </style>
 </head>
 <body>
-    <div class="container  contentdata mt-5" >
-        <form method="POST" action="" class="container form-inline" >
+    <div class="container  contentdata mt-5" style="width: min(90%, 60rem);" >
+        <form method="POST" action="" class="form-inline px-0 px-md-4" >
             {% csrf_token %}
             <h1 class="text-white" align="center">Add New Tender</h1>
             <hr style="height:3px;border:none;color:white;background-color:white;">
             <div id="productData">
-                <div class="col-sm-12 col-12 col-md-12 col-lg-12" style="height: 5rem;" >
+                <div class="col-sm-12 col-12 col-md-12 col-lg-12" >
                     <div class="form-group inputText mt-3 col-12 ">
                         <label for="customRange2" class="labeltext" style="width:100%;">Supplier Range(in KM.)</label>
                         <input type="range" name="kmRange" class="form-range" value="1" min="1" max="100" id="customRange2" onchange="rangevalue.value=value" style="margin-top:3%">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="row tabledata"  >
-                    
+
                     <div class="col-sm-12 col-md-6 col-lg-4" >
                         <div class="form-group inputText mt-3 ">
                             <label for="inputPassword2" class="labeltext mb-2">Product Name</label><br>
@@ -90,7 +90,7 @@
                                   <option value="{{cat.id}}">{{cat.catName}}</option>
                                 {% endfor %}
                             </select>
-                    
+
                         </div>
                     </div>
                 </div>

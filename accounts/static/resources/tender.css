@@ -3,16 +3,16 @@
 * {
 	box-sizing: border-box;
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 	font-family: Raleway, sans-serif;
 }
 
 body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);
 }
 
 .tabledata{
-    background-color: #5f57a3;    
+    background-color: #5f57a3;
 }
 
 .labeltext{
@@ -23,7 +23,7 @@ body {
 
 .contentdata{
     border-radius: 15px;
-    background-color: #5f57a3;    
+    background-color: #5f57a3;
     padding: 3%;
     width: 90% ;
 }
@@ -76,7 +76,7 @@ body {
 	font-weight: 700;
 	display: flex;
 	align-items: center;
-	width: -webkit-fill-available;
+	width: 100%;
 	color: #4C489D;
 	box-shadow: 0px 2px 2px #5C5696;
 	cursor: pointer;
@@ -117,13 +117,13 @@ input[type="range"]:active ~ #rangevalue {
 	text-align: center;
 	font-family: Arial, sans-serif;
 	display: block;
-	
+
 	margin: 20px 0;
 	position: relative;
 	left: 44.5%;
 	padding: 5px 5px;
 	border: 1px solid black;
-	
+
 	background: white;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;

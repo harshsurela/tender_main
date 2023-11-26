@@ -9,12 +9,12 @@
 <p>Click the button to get your coordinates.</p>
 
 {% comment %} <a href="#" id="getMe" onclick="getLocation()">jhhghj</a> {% endcomment %}
-<button id="getMe" onclick="getLocation()" style="width:50%;height:50vh;">Try It</button>
+<button id="getMe" onclick="getLocation()" style="width:min(90%, 30rem);height:50vh;">Try It</button>
 
 <p id="demo"></p>
 
 <script>
- 
+
 var x = document.getElementById("demo");
 $("#getMe").on('touchstart click', function(event) {
     if (event.type == "touchstart") {
@@ -37,7 +37,7 @@ btn.addEventListener('touchStart', function () {
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
+  } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
@@ -45,7 +45,7 @@ function getLocation() {
 function showPosition(position) {
   var token = $("input[name='csrfmiddlewaretoken']").val();
   document.getElementById('getMe').style.display="none";
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  x.innerHTML = "Latitude: " + position.coords.latitude +
   "<br>Longitude: " + position.coords.longitude;
     $.ajax({
         type: 'POST',
